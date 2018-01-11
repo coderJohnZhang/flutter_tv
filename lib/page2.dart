@@ -1,70 +1,314 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'poster.dart';
+import 'key_code.dart';
 
 class Page2Widget extends StatefulWidget {
+  const Page2Widget({
+    Key key,
+    this.turnPage,
+  })
+      : super(key: key);
+  final ValueChanged<int> turnPage;
+
   @override
   Page2WidgetState createState() => new Page2WidgetState();
 }
 
-class Page2WidgetState extends State<Page2Widget> {
+class Page2WidgetState extends State<Page2Widget>
+    with SingleTickerProviderStateMixin {
+  static const double SCREEN_WIDTH = 1240.0;
+  static const double SCREEN_HEIGHT = 530.0;
+  static const double TAB_HEIGHT = 130.0;
+
+  FocusNode focusNode;
+  final FocusNode focusNode0 = new FocusNode();
+  final FocusNode focusNode1 = new FocusNode();
+  final FocusNode focusNode2 = new FocusNode();
+  final FocusNode focusNode3 = new FocusNode();
+  final FocusNode focusNode4 = new FocusNode();
+
+  final GlobalKey globalKey0 = new GlobalKey();
+  final GlobalKey globalKey1 = new GlobalKey();
+  final GlobalKey globalKey2 = new GlobalKey();
+  final GlobalKey globalKey3 = new GlobalKey();
+  final GlobalKey globalKey4 = new GlobalKey();
+
+  final GlobalKey focusBoxKey = new GlobalKey();
+  Animation<RelativeRect> rectAnimation;
+  AnimationController controller;
+  RelativeRect rect;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = new AnimationController(
+        duration: kTabScrollDuration, vsync: this);
+    controller.addListener(handleAnimation);
+    Offset initOffset = const Offset(0.0, 130.0);
+    rect = new RelativeRect.fromLTRB(
+      initOffset.dx,
+      initOffset.dy - TAB_HEIGHT,
+      SCREEN_WIDTH - initOffset.dx - kPosters[0].width,
+      SCREEN_HEIGHT - initOffset.dy - kPosters[0].height,
+    );
+    print("page2 initState() rect = " + rect.toString());
+    rectAnimation =
+        new RelativeRectTween(begin: rect, end: rect.shift(Offset.zero))
+            .animate(controller);
+    focusNode = focusNode0;
+  }
+
+  @override
+  void dispose() {
+    print('page2 dispose()');
+    super.dispose();
+    controller.dispose();
+  }
+
+  void handleAnimation() {
+    setState(() {
+      rect = rectAnimation.value;
+    });
+  }
+
+  void _doFocusAnimation(GlobalKey key, Size newSize) {
+    print('page2 _doFocusAnimation()');
+    final RenderBox objRenderBox = key.currentContext.findRenderObject();
+    final Offset objCoordinates =
+        objRenderBox.localToGlobal(Offset.zero); //目标控件的屏幕绝对坐标
+    print('page2 _doFocusAnimation objCoordinates = $objCoordinates');
+    double left = objCoordinates.dx;
+    double top = objCoordinates.dy - TAB_HEIGHT;
+    double right = SCREEN_WIDTH - objCoordinates.dx - newSize.width;
+    double bottom = SCREEN_HEIGHT - objCoordinates.dy - newSize.height;
+    RelativeRect newRect = new RelativeRect.fromLTRB(left, top, right, bottom);
+    print("page2 _doFocusAnimation rect = " +
+        rect.toString() +
+        " newRect = " +
+        newRect.toString());
+    rectAnimation =
+        new RelativeRectTween(begin: rect, end: newRect).animate(controller);
+    controller.forward();
+    controller
+      ..value = 0.0
+      ..fling();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var container = new Container(
+    FocusScope.of(context).requestFocus(focusNode);
+    var focusBox = new PositionedTransition(
+        key: focusBoxKey,
+        rect: rectAnimation,
+        child: new Image.asset(
+          'images/launcher/move_focus.png',
+          fit: BoxFit.fill,
+        ));
+    var content = new Container(
         decoration: new BoxDecoration(
           image: const DecorationImage(
               fit: BoxFit.fill,
               image: const AssetImage('images/launcher/main_bg.jpg')),
         ),
-        child: new Column(children: [
+        child: new Row(children: [
           new Expanded(
-              child: new Row(children: [
-            new Expanded(
-                flex: 2,
-                child: buildPost('images/launcher/ic_post_2.jpg',
-                    'Big Fish & Begonia', 200.0, 160.0, 1200.0, 300.0)),
-            new Expanded(
-                flex: 1,
-                child: buildPost('images/launcher/ic_post_6.jpg', 'Line Walker',
-                    100.0, 160.0, 600.0, 300.0))
-          ])),
-          new Expanded(
-              child: new Row(children: [
-            new Expanded(
-                child: buildPost('images/launcher/ic_post_3.jpg', 'Alice\'s Adventures',
-                    65.0, 160.0, 600.0, 300.0)),
-            new Expanded(
-                child: buildPost('images/launcher/ic_post_7.jpg', 'W: Two Worlds',
-                    70.0, 160.0, 600.0, 300.0)),
-            new Expanded(
-                child: buildPost('images/launcher/ic_post_5.jpg', 'TMNT',
-                    120.0, 160.0, 600.0, 300.0))
-          ]))
-        ]));
-    return container;
-  }
-
-  Container buildPost(String imgPath, String text, double left, double top,
-      double width, double height) {
-    return new Container(
-        margin: const EdgeInsets.all(5.0),
-        child: new Stack(children: <Widget>[
-          new Container(
-              width: width,
-              height: height,
-              child: new Image.asset(imgPath, fit: BoxFit.fill)),
-          new Positioned(
-              left: left,
-              top: top,
-              child: new Container(
-                decoration: new BoxDecoration(color: Colors.black),
-                child: new Text(
-                  text,
-                  style: new TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontFamily: 'serif',
-                  ),
-                ),
+              flex: 1,
+              child: new RawKeyboardListener(
+                key: globalKey0,
+                focusNode: focusNode0,
+                onKey: (RawKeyEvent event) {
+                  if (event is RawKeyDownEvent &&
+                      event.data is RawKeyEventDataAndroid) {
+                    RawKeyDownEvent rawKeyDownEvent = event;
+                    RawKeyEventDataAndroid rawKeyEventDataAndroid =
+                        rawKeyDownEvent.data;
+                    print("page2 index0 keyCode = " +
+                        rawKeyEventDataAndroid.keyCode.toString());
+                    switch (rawKeyEventDataAndroid.keyCode) {
+                      case KEY_LEFT:
+                        if (widget.turnPage != null) {
+                          widget.turnPage(KEY_LEFT);
+                        }
+                        break;
+                      case KEY_RIGHT:
+                        focusNode = focusNode1;
+                        _doFocusAnimation(globalKey1,
+                            new Size(kPosters[1].width, kPosters[1].height));
+                        break;
+                      case KEY_DOWN:
+                        break;
+                      case KEY_UP:
+                        break;
+                      default:
+                        break;
+                    }
+                  }
+                },
+                child: buildPost(kPosters[0]),
               )),
+          new Expanded(
+              flex: 2,
+              child: new Column(children: [
+                new Expanded(
+                    child: new Row(children: [
+                  new Expanded(
+                      child: new RawKeyboardListener(
+                          key: globalKey1,
+                          focusNode: focusNode1,
+                          onKey: (RawKeyEvent event) {
+                            if (event is RawKeyDownEvent &&
+                                event.data is RawKeyEventDataAndroid) {
+                              RawKeyDownEvent rawKeyDownEvent = event;
+                              RawKeyEventDataAndroid rawKeyEventDataAndroid =
+                                  rawKeyDownEvent.data;
+                              print("page2 index1 keyCode = " +
+                                  rawKeyEventDataAndroid.keyCode.toString());
+                              switch (rawKeyEventDataAndroid.keyCode) {
+                                case KEY_LEFT:
+                                  focusNode = focusNode0;
+                                  _doFocusAnimation(
+                                      globalKey0,
+                                      new Size(kPosters[0].width,
+                                          kPosters[0].height));
+                                  break;
+                                case KEY_RIGHT:
+                                  focusNode = focusNode2;
+                                  _doFocusAnimation(
+                                      globalKey2,
+                                      new Size(kPosters[2].width,
+                                          kPosters[2].height));
+                                  break;
+                                case KEY_DOWN:
+                                  focusNode = focusNode3;
+                                  _doFocusAnimation(
+                                      globalKey3,
+                                      new Size(kPosters[3].width,
+                                          kPosters[3].height));
+                                  break;
+                                case KEY_UP:
+                                  break;
+                                default:
+                                  break;
+                              }
+                            }
+                          },
+                          child: buildPost(kPosters[1]))),
+                  new Expanded(
+                      child: new RawKeyboardListener(
+                          key: globalKey2,
+                          focusNode: focusNode2,
+                          onKey: (RawKeyEvent event) {
+                            if (event is RawKeyDownEvent &&
+                                event.data is RawKeyEventDataAndroid) {
+                              RawKeyDownEvent rawKeyDownEvent = event;
+                              RawKeyEventDataAndroid rawKeyEventDataAndroid =
+                                  rawKeyDownEvent.data;
+                              print("page2 index2 keyCode = " +
+                                  rawKeyEventDataAndroid.keyCode.toString());
+                              switch (rawKeyEventDataAndroid.keyCode) {
+                                case KEY_LEFT:
+                                  focusNode = focusNode1;
+                                  _doFocusAnimation(
+                                      globalKey1,
+                                      new Size(kPosters[1].width,
+                                          kPosters[1].height));
+                                  break;
+                                case KEY_RIGHT:
+                                  if (widget.turnPage != null) {
+                                    widget.turnPage(KEY_RIGHT);
+                                  }
+                                  break;
+                                case KEY_DOWN:
+                                  focusNode = focusNode3;
+                                  _doFocusAnimation(
+                                      globalKey3,
+                                      new Size(kPosters[3].width,
+                                          kPosters[3].height));
+                                  break;
+                                case KEY_UP:
+                                  break;
+                                default:
+                                  break;
+                              }
+                            }
+                          },
+                          child: buildPost(kPosters[2])))
+                ])),
+                new Expanded(
+                    child: new RawKeyboardListener(
+                        key: globalKey3,
+                        focusNode: focusNode3,
+                        onKey: (RawKeyEvent event) {
+                          if (event is RawKeyDownEvent &&
+                              event.data is RawKeyEventDataAndroid) {
+                            RawKeyDownEvent rawKeyDownEvent = event;
+                            RawKeyEventDataAndroid rawKeyEventDataAndroid =
+                                rawKeyDownEvent.data;
+                            print("page2 index3 keyCode = " +
+                                rawKeyEventDataAndroid.keyCode.toString());
+                            switch (rawKeyEventDataAndroid.keyCode) {
+                              case KEY_LEFT:
+                                focusNode = focusNode0;
+                                _doFocusAnimation(
+                                    globalKey0,
+                                    new Size(
+                                        kPosters[0].width, kPosters[0].height));
+                                break;
+                              case KEY_RIGHT:
+                                if (widget.turnPage != null) {
+                                  widget.turnPage(KEY_RIGHT);
+                                }
+                                break;
+                              case KEY_DOWN:
+                                break;
+                              case KEY_UP:
+                                focusNode = focusNode2;
+                                _doFocusAnimation(
+                                    globalKey2,
+                                    new Size(
+                                        kPosters[2].width, kPosters[2].height));
+                                break;
+                              default:
+                                break;
+                            }
+                          }
+                        },
+                        child: buildPost(kPosters[3])))
+              ]))
         ]));
+    return new Stack(children: <Widget>[content, focusBox]);
   }
 }
+
+const List<Poster> kPosters = const <Poster>[
+  const Poster(
+    id: 0,
+    name: 'Line Walker',
+    imagePath: 'images/launcher/ic_post_5.jpg',
+    width: 600.0,
+    height: 400.0,
+  ),
+  const Poster(
+    id: 1,
+    name: 'W: Two Worlds',
+    imagePath: 'images/launcher/ic_post_6.jpg',
+    width: 600.0,
+    height: 200.0,
+  ),
+  const Poster(
+    id: 2,
+    name: 'The Revenant',
+    imagePath: 'images/launcher/ic_post_7.jpg',
+    width: 600.0,
+    height: 200.0,
+  ),
+  const Poster(
+    id: 3,
+    name: 'Warcraft',
+    imagePath: 'images/launcher/ic_post_0.jpg',
+    width: 900.0,
+    height: 200.0,
+  ),
+];

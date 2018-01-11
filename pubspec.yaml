@@ -30,6 +30,7 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   assets:
+  - images/launcher/ic_post_0.jpg
   - images/launcher/ic_post_1.jpg
   - images/launcher/ic_post_2.jpg
   - images/launcher/ic_post_3.jpg
@@ -37,7 +38,6 @@ flutter:
   - images/launcher/ic_post_5.jpg
   - images/launcher/ic_post_6.jpg
   - images/launcher/ic_post_7.jpg
-  - images/launcher/ic_post_8.jpg
   - images/launcher/main_bg.jpg
   - images/launcher/move_focus.png
 
