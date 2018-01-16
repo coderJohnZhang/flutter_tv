@@ -89,16 +89,18 @@ class Page0WidgetState extends State<Page0Widget> {
                           break;
                         case KEY_RIGHT:
                           FocusScope.of(context).requestFocus(focusNode2);
-                          Size size = new Size(widget.screenSize.width / 3 - 10,
-                              widget.screenSize.height * 3 / 4 - 10);
+                          Size size = new Size(
+                              widget.screenSize.width / 3 - 10.0,
+                              widget.screenSize.height * 3 / 4 - 10.0);
                           if (widget.onFocusRight != null) {
                             widget.onFocusRight(globalKey2, size);
                           }
                           break;
                         case KEY_DOWN:
                           FocusScope.of(context).requestFocus(focusNode1);
-                          Size size = new Size(widget.screenSize.width / 3 - 10,
-                              widget.screenSize.height * 3 / 8 - 10);
+                          Size size = new Size(
+                              widget.screenSize.width / 3 - 10.0,
+                              widget.screenSize.height * 3 / 8 - 10.0);
                           if (widget.onFocusDown != null) {
                             widget.onFocusDown(globalKey1, size);
                           }
@@ -112,8 +114,8 @@ class Page0WidgetState extends State<Page0Widget> {
                   },
                   child: buildPost(
                       kPosters[0],
-                      new Size(widget.screenSize.width / 3 - 10,
-                          widget.screenSize.height * 3 / 8 - 10))),
+                      new Size(widget.screenSize.width / 3 - 10.0,
+                          widget.screenSize.height * 3 / 8 - 10.0))),
             ),
             new Expanded(
               child: new RawKeyboardListener(
@@ -133,8 +135,9 @@ class Page0WidgetState extends State<Page0Widget> {
                           break;
                         case KEY_RIGHT:
                           FocusScope.of(context).requestFocus(focusNode2);
-                          Size size = new Size(widget.screenSize.width / 3 - 10,
-                              widget.screenSize.height * 3 / 4 - 10);
+                          Size size = new Size(
+                              widget.screenSize.width / 3 - 10.0,
+                              widget.screenSize.height * 3 / 4 - 10.0);
                           if (widget.onFocusRight != null) {
                             widget.onFocusRight(globalKey2, size);
                           }
@@ -143,8 +146,9 @@ class Page0WidgetState extends State<Page0Widget> {
                           break;
                         case KEY_UP:
                           FocusScope.of(context).requestFocus(focusNode0);
-                          Size size = new Size(widget.screenSize.width / 3 - 10,
-                              widget.screenSize.height * 3 / 8 - 10);
+                          Size size = new Size(
+                              widget.screenSize.width / 3 - 10.0,
+                              widget.screenSize.height * 3 / 8 - 10.0);
                           if (widget.onFocusUp != null) {
                             widget.onFocusUp(globalKey0, size);
                           }
@@ -156,8 +160,8 @@ class Page0WidgetState extends State<Page0Widget> {
                   },
                   child: buildPost(
                       kPosters[1],
-                      new Size(widget.screenSize.width / 3 - 10,
-                          widget.screenSize.height * 3 / 8 - 10))),
+                      new Size(widget.screenSize.width / 3 - 10.0,
+                          widget.screenSize.height * 3 / 8 - 10.0))),
             )
           ])),
           new Expanded(
@@ -173,16 +177,16 @@ class Page0WidgetState extends State<Page0Widget> {
                     switch (rawKeyEventDataAndroid.keyCode) {
                       case KEY_LEFT:
                         FocusScope.of(context).requestFocus(focusNode0);
-                        Size size = new Size(widget.screenSize.width / 3 - 10,
-                            widget.screenSize.height * 3 / 8 - 10);
+                        Size size = new Size(widget.screenSize.width / 3 - 10.0,
+                            widget.screenSize.height * 3 / 8 - 10.0);
                         if (widget.onFocusLeft != null) {
                           widget.onFocusLeft(globalKey0, size);
                         }
                         break;
                       case KEY_RIGHT:
                         FocusScope.of(context).requestFocus(focusNode3);
-                        Size size = new Size(widget.screenSize.width / 3 - 10,
-                            widget.screenSize.height * 3 / 8 - 10);
+                        Size size = new Size(widget.screenSize.width / 3 - 10.0,
+                            widget.screenSize.height * 3 / 8 - 10.0);
                         if (widget.onFocusRight != null) {
                           widget.onFocusRight(globalKey3, size);
                         }
@@ -198,8 +202,8 @@ class Page0WidgetState extends State<Page0Widget> {
                 },
                 child: buildPost(
                     kPosters[2],
-                    new Size(widget.screenSize.width / 3 - 10,
-                        widget.screenSize.height * 3 / 4 - 10))),
+                    new Size(widget.screenSize.width / 3 - 10.0,
+                        widget.screenSize.height * 3 / 4 - 10.0))),
           ),
           new Expanded(
               child: new Column(children: [
@@ -216,8 +220,9 @@ class Page0WidgetState extends State<Page0Widget> {
                       switch (rawKeyEventDataAndroid.keyCode) {
                         case KEY_LEFT:
                           FocusScope.of(context).requestFocus(focusNode2);
-                          Size size = new Size(widget.screenSize.width / 3 - 10,
-                              widget.screenSize.height * 3 / 4 - 10);
+                          Size size = new Size(
+                              widget.screenSize.width / 3 - 10.0,
+                              widget.screenSize.height * 3 / 4 - 10.0);
                           if (widget.onFocusLeft != null) {
                             widget.onFocusLeft(globalKey2, size);
                           }
@@ -230,8 +235,8 @@ class Page0WidgetState extends State<Page0Widget> {
                         case KEY_DOWN:
                           FocusScope.of(context).requestFocus(focusNode4);
                           Size size = new Size(
-                              widget.screenSize.width / 3 - 10,
-                              widget.screenSize.height * 3 / 8 - 10);
+                              widget.screenSize.width / 3 - 10.0,
+                              widget.screenSize.height * 3 / 8 - 10.0);
                           if (widget.onFocusDown != null) {
                             widget.onFocusDown(globalKey4, size);
                           }
@@ -245,8 +250,8 @@ class Page0WidgetState extends State<Page0Widget> {
                   },
                   child: buildPost(
                       kPosters[3],
-                      new Size(widget.screenSize.width / 3 - 10,
-                          widget.screenSize.height * 3 / 8 - 10))),
+                      new Size(widget.screenSize.width / 3 - 10.0,
+                          widget.screenSize.height * 3 / 8 - 10.0))),
             ),
             new Expanded(
               child: new RawKeyboardListener(
@@ -261,8 +266,9 @@ class Page0WidgetState extends State<Page0Widget> {
                       switch (rawKeyEventDataAndroid.keyCode) {
                         case KEY_LEFT:
                           FocusScope.of(context).requestFocus(focusNode2);
-                          Size size = new Size(widget.screenSize.width / 3 - 10,
-                              widget.screenSize.height * 3 / 4 - 10);
+                          Size size = new Size(
+                              widget.screenSize.width / 3 - 10.0,
+                              widget.screenSize.height * 3 / 4 - 10.0);
                           if (widget.onFocusLeft != null) {
                             widget.onFocusLeft(globalKey2, size);
                           }
@@ -276,8 +282,9 @@ class Page0WidgetState extends State<Page0Widget> {
                           break;
                         case KEY_UP:
                           FocusScope.of(context).requestFocus(focusNode3);
-                          Size size = new Size(widget.screenSize.width / 3 - 10,
-                              widget.screenSize.height * 3 / 8 - 10);
+                          Size size = new Size(
+                              widget.screenSize.width / 3 - 10.0,
+                              widget.screenSize.height * 3 / 8 - 10.0);
                           if (widget.onFocusUp != null) {
                             widget.onFocusUp(globalKey3, size);
                           }
@@ -289,8 +296,8 @@ class Page0WidgetState extends State<Page0Widget> {
                   },
                   child: buildPost(
                       kPosters[4],
-                      new Size(widget.screenSize.width / 3 - 10,
-                          widget.screenSize.height * 3 / 8 - 10))),
+                      new Size(widget.screenSize.width / 3 - 10.0,
+                          widget.screenSize.height * 3 / 8 - 10.0))),
             )
           ]))
         ]));

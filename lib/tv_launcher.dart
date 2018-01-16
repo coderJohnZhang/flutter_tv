@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui' show window;
 import 'page0.dart';
 import 'page1.dart';
 import 'page2.dart';
@@ -17,13 +18,6 @@ class _Page {
 }
 
 class PosterDemo extends StatefulWidget {
-  const PosterDemo({
-    Key key,
-    this.screenSize,
-  })
-      : super(key: key);
-  final Size screenSize;
-
   @override
   _PosterDemoState createState() => new _PosterDemoState();
 }
@@ -34,16 +28,18 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
   Animation<RelativeRect> rectAnimation;
   AnimationController focusController;
   RelativeRect rect;
+  final Size screenSize = window.physicalSize / window.devicePixelRatio;
 
   @override
   void initState() {
+    print('initState() screenSize = $screenSize');
     super.initState();
     _allPages = <_Page>[
       new _Page(
           icon: Icons.event,
           text: 'EVENT',
           widget: new Page0Widget(
-            screenSize: widget.screenSize,
+            screenSize: screenSize,
             onFocusLeft: (GlobalKey key, Size size) {
               print('page0 onFocusLeft key = $key size = $size');
               if (key == null && size == null) {
@@ -56,9 +52,9 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
               print('page0 onFocusRight key = $key size = $size');
               if (key == null && size == null) {
                 nextPage();
-                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
-                Size size = new Size(widget.screenSize.width * 2 / 3 - 10,
-                    widget.screenSize.height * 3 / 8 - 10);
+                Offset offset = new Offset(0.0, screenSize.height / 4);
+                Size size = new Size(screenSize.width * 2 / 3 - 10.0,
+                    screenSize.height * 3 / 8 - 10.0);
                 initialFocusAnimation(offset, size);
               } else {
                 _doFocusAnimation(key, size);
@@ -81,14 +77,14 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
           icon: Icons.home,
           text: 'HOME',
           widget: new Page1Widget(
-            screenSize: widget.screenSize,
+            screenSize: screenSize,
             onFocusLeft: (GlobalKey key, Size size) {
               print('page1 onFocusLeft key = $key size = $size');
               if (key == null && size == null) {
                 previousPage();
-                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
-                Size size = new Size(widget.screenSize.width / 3 - 10,
-                    widget.screenSize.height * 3 / 8 - 10);
+                Offset offset = new Offset(0.0, screenSize.height / 4);
+                Size size = new Size(screenSize.width / 3 - 10.0,
+                    screenSize.height * 3 / 8 - 10.0);
                 initialFocusAnimation(offset, size);
               } else {
                 _doFocusAnimation(key, size);
@@ -98,9 +94,9 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
               print('page1 onFocusRight key = $key size = $size');
               if (key == null && size == null) {
                 nextPage();
-                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
-                Size size = new Size(widget.screenSize.width / 3 - 10,
-                    widget.screenSize.height * 3 / 4 - 10);
+                Offset offset = new Offset(0.0, screenSize.height / 4);
+                Size size = new Size(screenSize.width / 3 - 10.0,
+                    screenSize.height * 3 / 4 - 10.0);
                 initialFocusAnimation(offset, size);
               } else {
                 _doFocusAnimation(key, size);
@@ -123,14 +119,14 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
           icon: Icons.airplay,
           text: 'AIRPLAY',
           widget: new Page2Widget(
-            screenSize: widget.screenSize,
+            screenSize: screenSize,
             onFocusLeft: (GlobalKey key, Size size) {
               print('page2 onFocusLeft key = $key size = $size');
               if (key == null && size == null) {
                 previousPage();
-                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
-                Size size = new Size(widget.screenSize.width * 2 / 3 - 10,
-                    widget.screenSize.height * 3 / 8 - 10);
+                Offset offset = new Offset(0.0, screenSize.height / 4);
+                Size size = new Size(screenSize.width * 2 / 3 - 10.0,
+                    screenSize.height * 3 / 8 - 10.0);
                 initialFocusAnimation(offset, size);
               } else {
                 _doFocusAnimation(key, size);
@@ -140,9 +136,9 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
               print('page2 onFocusRight key = $key size = $size');
               if (key == null && size == null) {
                 nextPage();
-                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
-                Size size = new Size(widget.screenSize.width / 3 - 10,
-                    widget.screenSize.height * 3 / 4 - 10);
+                Offset offset = new Offset(0.0, screenSize.height / 4);
+                Size size = new Size(screenSize.width / 3 - 10.0,
+                    screenSize.height * 3 / 4 - 10.0);
                 initialFocusAnimation(offset, size);
               } else {
                 _doFocusAnimation(key, size);
@@ -165,14 +161,14 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
           icon: Icons.language,
           text: 'LANGUAGE',
           widget: new Page3Widget(
-            screenSize: widget.screenSize,
+            screenSize: screenSize,
             onFocusLeft: (GlobalKey key, Size size) {
               print('page3 onFocusLeft key = $key size = $size');
               if (key == null && size == null) {
                 previousPage();
-                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
-                Size size = new Size(widget.screenSize.width / 3 - 10,
-                    widget.screenSize.height * 3 / 4 - 10);
+                Offset offset = new Offset(0.0, screenSize.height / 4);
+                Size size = new Size(screenSize.width / 3 - 10.0,
+                    screenSize.height * 3 / 4 - 10.0);
                 initialFocusAnimation(offset, size);
               } else {
                 _doFocusAnimation(key, size);
@@ -206,9 +202,9 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
     focusController = new AnimationController(
         duration: const Duration(milliseconds: 300), vsync: this);
     focusController.addListener(handleAnimation);
-    Offset initOffset = new Offset(0.0, widget.screenSize.height / 4);
-    Size size = new Size(widget.screenSize.width / 3 - 10,
-        widget.screenSize.height * 3 / 8 - 10);
+    Offset initOffset = new Offset(0.0, screenSize.height / 4);
+    Size size =
+        new Size(screenSize.width / 3 - 10.0, screenSize.height * 3 / 8 - 10.0);
     initialFocusAnimation(initOffset, size);
   }
 
@@ -243,11 +239,10 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
         objRenderBox.localToGlobal(Offset.zero); //目标控件的屏幕绝对坐标
     print('_doFocusAnimation objCoordinates = $objCoordinates');
     double left = objCoordinates.dx;
-    double top = objCoordinates.dy - widget.screenSize.height / 4;
-    double right =
-        widget.screenSize.width - objCoordinates.dx - newSize.width - 10.0;
+    double top = objCoordinates.dy - screenSize.height / 4;
+    double right = screenSize.width - objCoordinates.dx - newSize.width - 10.0;
     double bottom =
-        widget.screenSize.height - objCoordinates.dy - newSize.height - 10.0;
+        screenSize.height - objCoordinates.dy - newSize.height - 10.0;
     RelativeRect newRect = new RelativeRect.fromLTRB(left, top, right, bottom);
     print("_doFocusAnimation rect = " +
         rect.toString() +
@@ -265,9 +260,9 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
     print('initialFocusAnimation()');
     rect = new RelativeRect.fromLTRB(
       initOffset.dx,
-      initOffset.dy - widget.screenSize.height / 4,
-      widget.screenSize.width - initOffset.dx - size.width - 10.0,
-      widget.screenSize.height - initOffset.dy - size.height - 10.0,
+      initOffset.dy - screenSize.height / 4,
+      screenSize.width - initOffset.dx - size.width - 10.0,
+      screenSize.height - initOffset.dy - size.height - 10.0,
     );
     print("initialFocusAnimation() rect = " + rect.toString());
     rectAnimation =
