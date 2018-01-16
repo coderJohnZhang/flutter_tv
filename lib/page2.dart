@@ -3,31 +3,33 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'poster.dart';
 import 'key_code.dart';
+import 'call_back.dart';
 
 class Page2Widget extends StatefulWidget {
   const Page2Widget({
     Key key,
-    this.turnPage,
+    this.onFocusLeft,
+    this.onFocusRight,
+    this.onFocusUp,
+    this.onFocusDown,
+    this.screenSize,
   })
       : super(key: key);
-  final ValueChanged<int> turnPage;
+  final OnFocusChangeCallback<GlobalKey, Size> onFocusLeft;
+  final OnFocusChangeCallback<GlobalKey, Size> onFocusRight;
+  final OnFocusChangeCallback<GlobalKey, Size> onFocusUp;
+  final OnFocusChangeCallback<GlobalKey, Size> onFocusDown;
+  final Size screenSize;
 
   @override
   Page2WidgetState createState() => new Page2WidgetState();
 }
 
-class Page2WidgetState extends State<Page2Widget>
-    with SingleTickerProviderStateMixin {
-  static const double SCREEN_WIDTH = 1240.0;
-  static const double SCREEN_HEIGHT = 530.0;
-  static const double TAB_HEIGHT = 130.0;
-
-  FocusNode focusNode;
-  final FocusNode focusNode0 = new FocusNode();
-  final FocusNode focusNode1 = new FocusNode();
-  final FocusNode focusNode2 = new FocusNode();
-  final FocusNode focusNode3 = new FocusNode();
-  final FocusNode focusNode4 = new FocusNode();
+class Page2WidgetState extends State<Page2Widget> {
+  FocusNode focusNode0;
+  FocusNode focusNode1;
+  FocusNode focusNode2;
+  FocusNode focusNode3;
 
   final GlobalKey globalKey0 = new GlobalKey();
   final GlobalKey globalKey1 = new GlobalKey();
@@ -35,78 +37,30 @@ class Page2WidgetState extends State<Page2Widget>
   final GlobalKey globalKey3 = new GlobalKey();
   final GlobalKey globalKey4 = new GlobalKey();
 
-  final GlobalKey focusBoxKey = new GlobalKey();
-  Animation<RelativeRect> rectAnimation;
-  AnimationController controller;
-  RelativeRect rect;
-
   @override
   void initState() {
+    print('page2 initState called.');
     super.initState();
-    controller = new AnimationController(
-        duration: kTabScrollDuration, vsync: this);
-    controller.addListener(handleAnimation);
-    Offset initOffset = const Offset(0.0, 130.0);
-    rect = new RelativeRect.fromLTRB(
-      initOffset.dx,
-      initOffset.dy - TAB_HEIGHT,
-      SCREEN_WIDTH - initOffset.dx - kPosters[0].width,
-      SCREEN_HEIGHT - initOffset.dy - kPosters[0].height,
-    );
-    print("page2 initState() rect = " + rect.toString());
-    rectAnimation =
-        new RelativeRectTween(begin: rect, end: rect.shift(Offset.zero))
-            .animate(controller);
-    focusNode = focusNode0;
+    focusNode0 = new FocusNode();
+    focusNode1 = new FocusNode();
+    focusNode2 = new FocusNode();
+    focusNode3 = new FocusNode();
   }
 
   @override
   void dispose() {
-    print('page2 dispose()');
+    print('page2 dispose called.');
+    focusNode0.dispose();
+    focusNode1.dispose();
+    focusNode2.dispose();
+    focusNode3.dispose();
     super.dispose();
-    controller.dispose();
-  }
-
-  void handleAnimation() {
-    setState(() {
-      rect = rectAnimation.value;
-    });
-  }
-
-  void _doFocusAnimation(GlobalKey key, Size newSize) {
-    print('page2 _doFocusAnimation()');
-    final RenderBox objRenderBox = key.currentContext.findRenderObject();
-    final Offset objCoordinates =
-        objRenderBox.localToGlobal(Offset.zero); //目标控件的屏幕绝对坐标
-    print('page2 _doFocusAnimation objCoordinates = $objCoordinates');
-    double left = objCoordinates.dx;
-    double top = objCoordinates.dy - TAB_HEIGHT;
-    double right = SCREEN_WIDTH - objCoordinates.dx - newSize.width;
-    double bottom = SCREEN_HEIGHT - objCoordinates.dy - newSize.height;
-    RelativeRect newRect = new RelativeRect.fromLTRB(left, top, right, bottom);
-    print("page2 _doFocusAnimation rect = " +
-        rect.toString() +
-        " newRect = " +
-        newRect.toString());
-    rectAnimation =
-        new RelativeRectTween(begin: rect, end: newRect).animate(controller);
-    controller.forward();
-    controller
-      ..value = 0.0
-      ..fling();
   }
 
   @override
   Widget build(BuildContext context) {
-    FocusScope.of(context).requestFocus(focusNode);
-    var focusBox = new PositionedTransition(
-        key: focusBoxKey,
-        rect: rectAnimation,
-        child: new Image.asset(
-          'images/launcher/move_focus.png',
-          fit: BoxFit.fill,
-        ));
-    var content = new Container(
+    FocusScope.of(context).requestFocus(focusNode0);
+    return new Container(
         decoration: new BoxDecoration(
           image: const DecorationImage(
               fit: BoxFit.fill,
@@ -124,18 +78,19 @@ class Page2WidgetState extends State<Page2Widget>
                     RawKeyDownEvent rawKeyDownEvent = event;
                     RawKeyEventDataAndroid rawKeyEventDataAndroid =
                         rawKeyDownEvent.data;
-                    print("page2 index0 keyCode = " +
-                        rawKeyEventDataAndroid.keyCode.toString());
                     switch (rawKeyEventDataAndroid.keyCode) {
                       case KEY_LEFT:
-                        if (widget.turnPage != null) {
-                          widget.turnPage(KEY_LEFT);
+                        if (widget.onFocusLeft != null) {
+                          widget.onFocusLeft(null, null);
                         }
                         break;
                       case KEY_RIGHT:
-                        focusNode = focusNode1;
-                        _doFocusAnimation(globalKey1,
-                            new Size(kPosters[1].width, kPosters[1].height));
+                        FocusScope.of(context).requestFocus(focusNode1);
+                        Size size = new Size(widget.screenSize.width / 3 - 10,
+                            widget.screenSize.height * 3 / 8 - 10);
+                        if (widget.onFocusRight != null) {
+                          widget.onFocusRight(globalKey1, size);
+                        }
                         break;
                       case KEY_DOWN:
                         break;
@@ -146,7 +101,10 @@ class Page2WidgetState extends State<Page2Widget>
                     }
                   }
                 },
-                child: buildPost(kPosters[0]),
+                child: buildPost(
+                    kPosters[0],
+                    new Size(widget.screenSize.width / 3 - 10,
+                        widget.screenSize.height * 3 / 4 - 10)),
               )),
           new Expanded(
               flex: 2,
@@ -163,29 +121,39 @@ class Page2WidgetState extends State<Page2Widget>
                               RawKeyDownEvent rawKeyDownEvent = event;
                               RawKeyEventDataAndroid rawKeyEventDataAndroid =
                                   rawKeyDownEvent.data;
-                              print("page2 index1 keyCode = " +
-                                  rawKeyEventDataAndroid.keyCode.toString());
                               switch (rawKeyEventDataAndroid.keyCode) {
                                 case KEY_LEFT:
-                                  focusNode = focusNode0;
-                                  _doFocusAnimation(
-                                      globalKey0,
-                                      new Size(kPosters[0].width,
-                                          kPosters[0].height));
+                                  FocusScope
+                                      .of(context)
+                                      .requestFocus(focusNode0);
+                                  Size size = new Size(
+                                      widget.screenSize.width / 3 - 10,
+                                      widget.screenSize.height * 3 / 4 - 10);
+                                  if (widget.onFocusLeft != null) {
+                                    widget.onFocusLeft(globalKey0, size);
+                                  }
                                   break;
                                 case KEY_RIGHT:
-                                  focusNode = focusNode2;
-                                  _doFocusAnimation(
-                                      globalKey2,
-                                      new Size(kPosters[2].width,
-                                          kPosters[2].height));
+                                  FocusScope
+                                      .of(context)
+                                      .requestFocus(focusNode2);
+                                  Size size = new Size(
+                                      widget.screenSize.width / 3 - 10,
+                                      widget.screenSize.height * 3 / 8 - 10);
+                                  if (widget.onFocusRight != null) {
+                                    widget.onFocusRight(globalKey2, size);
+                                  }
                                   break;
                                 case KEY_DOWN:
-                                  focusNode = focusNode3;
-                                  _doFocusAnimation(
-                                      globalKey3,
-                                      new Size(kPosters[3].width,
-                                          kPosters[3].height));
+                                  FocusScope
+                                      .of(context)
+                                      .requestFocus(focusNode3);
+                                  Size size = new Size(
+                                      widget.screenSize.width * 2 / 3 - 10,
+                                      widget.screenSize.height * 3 / 8 - 10);
+                                  if (widget.onFocusDown != null) {
+                                    widget.onFocusDown(globalKey3, size);
+                                  }
                                   break;
                                 case KEY_UP:
                                   break;
@@ -194,7 +162,10 @@ class Page2WidgetState extends State<Page2Widget>
                               }
                             }
                           },
-                          child: buildPost(kPosters[1]))),
+                          child: buildPost(
+                              kPosters[1],
+                              new Size(widget.screenSize.width / 3 - 10,
+                                  widget.screenSize.height * 3 / 8 - 10)))),
                   new Expanded(
                       child: new RawKeyboardListener(
                           key: globalKey2,
@@ -205,27 +176,33 @@ class Page2WidgetState extends State<Page2Widget>
                               RawKeyDownEvent rawKeyDownEvent = event;
                               RawKeyEventDataAndroid rawKeyEventDataAndroid =
                                   rawKeyDownEvent.data;
-                              print("page2 index2 keyCode = " +
-                                  rawKeyEventDataAndroid.keyCode.toString());
                               switch (rawKeyEventDataAndroid.keyCode) {
                                 case KEY_LEFT:
-                                  focusNode = focusNode1;
-                                  _doFocusAnimation(
-                                      globalKey1,
-                                      new Size(kPosters[1].width,
-                                          kPosters[1].height));
+                                  FocusScope
+                                      .of(context)
+                                      .requestFocus(focusNode1);
+                                  Size size = new Size(
+                                      widget.screenSize.width / 3 - 10,
+                                      widget.screenSize.height * 3 / 8 - 10);
+                                  if (widget.onFocusLeft != null) {
+                                    widget.onFocusLeft(globalKey1, size);
+                                  }
                                   break;
                                 case KEY_RIGHT:
-                                  if (widget.turnPage != null) {
-                                    widget.turnPage(KEY_RIGHT);
+                                  if (widget.onFocusRight != null) {
+                                    widget.onFocusRight(null, null);
                                   }
                                   break;
                                 case KEY_DOWN:
-                                  focusNode = focusNode3;
-                                  _doFocusAnimation(
-                                      globalKey3,
-                                      new Size(kPosters[3].width,
-                                          kPosters[3].height));
+                                  FocusScope
+                                      .of(context)
+                                      .requestFocus(focusNode3);
+                                  Size size = new Size(
+                                      widget.screenSize.width * 2 / 3 - 10,
+                                      widget.screenSize.height * 3 / 8 - 10);
+                                  if (widget.onFocusDown != null) {
+                                    widget.onFocusDown(globalKey3, size);
+                                  }
                                   break;
                                 case KEY_UP:
                                   break;
@@ -234,7 +211,10 @@ class Page2WidgetState extends State<Page2Widget>
                               }
                             }
                           },
-                          child: buildPost(kPosters[2])))
+                          child: buildPost(
+                              kPosters[2],
+                              new Size(widget.screenSize.width / 3 - 10,
+                                  widget.screenSize.height * 3 / 8 - 10))))
                 ])),
                 new Expanded(
                     child: new RawKeyboardListener(
@@ -246,39 +226,43 @@ class Page2WidgetState extends State<Page2Widget>
                             RawKeyDownEvent rawKeyDownEvent = event;
                             RawKeyEventDataAndroid rawKeyEventDataAndroid =
                                 rawKeyDownEvent.data;
-                            print("page2 index3 keyCode = " +
-                                rawKeyEventDataAndroid.keyCode.toString());
                             switch (rawKeyEventDataAndroid.keyCode) {
                               case KEY_LEFT:
-                                focusNode = focusNode0;
-                                _doFocusAnimation(
-                                    globalKey0,
-                                    new Size(
-                                        kPosters[0].width, kPosters[0].height));
+                                FocusScope.of(context).requestFocus(focusNode0);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10,
+                                    widget.screenSize.height * 3 / 4 - 10);
+                                if (widget.onFocusLeft != null) {
+                                  widget.onFocusLeft(globalKey0, size);
+                                }
                                 break;
                               case KEY_RIGHT:
-                                if (widget.turnPage != null) {
-                                  widget.turnPage(KEY_RIGHT);
+                                if (widget.onFocusRight != null) {
+                                  widget.onFocusRight(null, null);
                                 }
                                 break;
                               case KEY_DOWN:
                                 break;
                               case KEY_UP:
-                                focusNode = focusNode2;
-                                _doFocusAnimation(
-                                    globalKey2,
-                                    new Size(
-                                        kPosters[2].width, kPosters[2].height));
+                                FocusScope.of(context).requestFocus(focusNode2);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10,
+                                    widget.screenSize.height * 3 / 8 - 10);
+                                if (widget.onFocusUp != null) {
+                                  widget.onFocusUp(globalKey2, size);
+                                }
                                 break;
                               default:
                                 break;
                             }
                           }
                         },
-                        child: buildPost(kPosters[3])))
+                        child: buildPost(
+                            kPosters[3],
+                            new Size(widget.screenSize.width * 2 / 3 - 10,
+                                widget.screenSize.height * 3 / 8 - 10))))
               ]))
         ]));
-    return new Stack(children: <Widget>[content, focusBox]);
   }
 }
 
@@ -287,28 +271,20 @@ const List<Poster> kPosters = const <Poster>[
     id: 0,
     name: 'Line Walker',
     imagePath: 'images/launcher/ic_post_5.jpg',
-    width: 600.0,
-    height: 400.0,
   ),
   const Poster(
     id: 1,
     name: 'W: Two Worlds',
     imagePath: 'images/launcher/ic_post_6.jpg',
-    width: 600.0,
-    height: 200.0,
   ),
   const Poster(
     id: 2,
     name: 'The Revenant',
     imagePath: 'images/launcher/ic_post_7.jpg',
-    width: 600.0,
-    height: 200.0,
   ),
   const Poster(
     id: 3,
     name: 'Warcraft',
     imagePath: 'images/launcher/ic_post_0.jpg',
-    width: 900.0,
-    height: 200.0,
   ),
 ];

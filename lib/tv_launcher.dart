@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'page2.dart';
 import 'page0.dart';
 import 'page1.dart';
+import 'page2.dart';
 import 'page3.dart';
-import 'key_code.dart';
 
-/*
- * 页面类
- *  图标
- *  文本
- */
 class _Page {
   _Page({
     this.icon,
@@ -23,20 +17,23 @@ class _Page {
 }
 
 class PosterDemo extends StatefulWidget {
+  const PosterDemo({
+    Key key,
+    this.screenSize,
+  })
+      : super(key: key);
+  final Size screenSize;
+
   @override
   _PosterDemoState createState() => new _PosterDemoState();
 }
 
-// 继承SingleTickerProviderStateMixin，提供单个Ticker（每个动画帧调用它的回调一次）
-class _PosterDemoState extends State<PosterDemo>
-    with SingleTickerProviderStateMixin {
-  /*
-   * 在TabBar和TabBarView之间的坐标选项卡选择
-   *  TabBar：质感设计控件，显示水平的一行选项卡
-   *  TabBarView：可分布列表，显示与当前所选标签对应的控件
-   */
-  TabController _controller;
+class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
+  TabController _tabController;
   List<_Page> _allPages;
+  Animation<RelativeRect> rectAnimation;
+  AnimationController focusController;
+  RelativeRect rect;
 
   @override
   void initState() {
@@ -46,99 +43,292 @@ class _PosterDemoState extends State<PosterDemo>
           icon: Icons.event,
           text: 'EVENT',
           widget: new Page0Widget(
-            turnPage: (int key) {
-              turnPage(key);
+            screenSize: widget.screenSize,
+            onFocusLeft: (GlobalKey key, Size size) {
+              print('page0 onFocusLeft key = $key size = $size');
+              if (key == null && size == null) {
+                previousPage();
+              } else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusRight: (GlobalKey key, Size size) {
+              print('page0 onFocusRight key = $key size = $size');
+              if (key == null && size == null) {
+                nextPage();
+                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
+                Size size = new Size(widget.screenSize.width * 2 / 3 - 10,
+                    widget.screenSize.height * 3 / 8 - 10);
+                initialFocusAnimation(offset, size);
+              } else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusUp: (GlobalKey key, Size size) {
+              print('page0 onFocusUp key = $key size = $size');
+              if (key == null && size == null) {} else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusDown: (GlobalKey key, Size size) {
+              print('page0 onFocusDown key = $key size = $size');
+              if (key == null && size == null) {} else {
+                _doFocusAnimation(key, size);
+              }
             },
           )),
       new _Page(
           icon: Icons.home,
           text: 'HOME',
           widget: new Page1Widget(
-            turnPage: (int key) {
-              turnPage(key);
+            screenSize: widget.screenSize,
+            onFocusLeft: (GlobalKey key, Size size) {
+              print('page1 onFocusLeft key = $key size = $size');
+              if (key == null && size == null) {
+                previousPage();
+                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
+                Size size = new Size(widget.screenSize.width / 3 - 10,
+                    widget.screenSize.height * 3 / 8 - 10);
+                initialFocusAnimation(offset, size);
+              } else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusRight: (GlobalKey key, Size size) {
+              print('page1 onFocusRight key = $key size = $size');
+              if (key == null && size == null) {
+                nextPage();
+                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
+                Size size = new Size(widget.screenSize.width / 3 - 10,
+                    widget.screenSize.height * 3 / 4 - 10);
+                initialFocusAnimation(offset, size);
+              } else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusUp: (GlobalKey key, Size size) {
+              print('page1 onFocusUp key = $key size = $size');
+              if (key == null && size == null) {} else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusDown: (GlobalKey key, Size size) {
+              print('page1 onFocusDown key = $key size = $size');
+              if (key == null && size == null) {} else {
+                _doFocusAnimation(key, size);
+              }
             },
           )),
       new _Page(
           icon: Icons.airplay,
           text: 'AIRPLAY',
           widget: new Page2Widget(
-            turnPage: (int key) {
-              turnPage(key);
+            screenSize: widget.screenSize,
+            onFocusLeft: (GlobalKey key, Size size) {
+              print('page2 onFocusLeft key = $key size = $size');
+              if (key == null && size == null) {
+                previousPage();
+                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
+                Size size = new Size(widget.screenSize.width * 2 / 3 - 10,
+                    widget.screenSize.height * 3 / 8 - 10);
+                initialFocusAnimation(offset, size);
+              } else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusRight: (GlobalKey key, Size size) {
+              print('page2 onFocusRight key = $key size = $size');
+              if (key == null && size == null) {
+                nextPage();
+                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
+                Size size = new Size(widget.screenSize.width / 3 - 10,
+                    widget.screenSize.height * 3 / 4 - 10);
+                initialFocusAnimation(offset, size);
+              } else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusUp: (GlobalKey key, Size size) {
+              print('page2 onFocusUp key = $key size = $size');
+              if (key == null && size == null) {} else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusDown: (GlobalKey key, Size size) {
+              print('page2 onFocusDown key = $key size = $size');
+              if (key == null && size == null) {} else {
+                _doFocusAnimation(key, size);
+              }
             },
           )),
       new _Page(
           icon: Icons.language,
           text: 'LANGUAGE',
           widget: new Page3Widget(
-            turnPage: (int key) {
-              turnPage(key);
+            screenSize: widget.screenSize,
+            onFocusLeft: (GlobalKey key, Size size) {
+              print('page3 onFocusLeft key = $key size = $size');
+              if (key == null && size == null) {
+                previousPage();
+                Offset offset = new Offset(0.0, widget.screenSize.height / 4);
+                Size size = new Size(widget.screenSize.width / 3 - 10,
+                    widget.screenSize.height * 3 / 4 - 10);
+                initialFocusAnimation(offset, size);
+              } else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusRight: (GlobalKey key, Size size) {
+              print('page3 onFocusRight key = $key size = $size');
+              if (key == null && size == null) {
+                nextPage();
+              } else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusUp: (GlobalKey key, Size size) {
+              print('page3 onFocusUp key = $key size = $size');
+              if (key == null && size == null) {} else {
+                _doFocusAnimation(key, size);
+              }
+            },
+            onFocusDown: (GlobalKey key, Size size) {
+              print('page3 onFocusDown key = $key size = $size');
+              if (key == null && size == null) {} else {
+                _doFocusAnimation(key, size);
+              }
             },
           ))
     ];
-    /*
-     * 创建一个对象，用于管理TabBar和TabBarView所需的状态
-     *  length：选项卡的总数，存储所有页面的列表中的元素个数
-     */
-    _controller = new TabController(vsync: this, length: _allPages.length);
+
+    _tabController = new TabController(vsync: this, length: _allPages.length);
+
+    focusController = new AnimationController(
+        duration: const Duration(milliseconds: 300), vsync: this);
+    focusController.addListener(handleAnimation);
+    Offset initOffset = new Offset(0.0, widget.screenSize.height / 4);
+    Size size = new Size(widget.screenSize.width / 3 - 10,
+        widget.screenSize.height * 3 / 8 - 10);
+    initialFocusAnimation(initOffset, size);
   }
 
-  void turnPage(int key) {
-    if (key == KEY_LEFT) {
-      if (_controller.index == 0) {
-        _controller.index = _allPages.length - 1;
-      } else {
-        _controller.index--;
-      }
-    } else if (key == KEY_RIGHT) {
-      if (_controller.index == _allPages.length - 1) {
-        _controller.index = 0;
-      } else {
-        _controller.index++;
-      }
+  void handleAnimation() {
+    setState(() {
+      rect = rectAnimation.value;
+    });
+  }
+
+  void previousPage() {
+    if (_tabController.index > 0) {
+      _tabController.index--;
     }
-    _controller.animateTo(_controller.index,
+    _tabController.animateTo(_tabController.index,
         duration: kTabScrollDuration, curve: Curves.ease);
-    print("current index = " + _controller.index.toString());
+    print("current index = " + _tabController.index.toString());
+  }
+
+  void nextPage() {
+    if (_tabController.index < _allPages.length - 1) {
+      _tabController.index++;
+    }
+    _tabController.animateTo(_tabController.index,
+        duration: kTabScrollDuration, curve: Curves.ease);
+    print("current index = " + _tabController.index.toString());
+  }
+
+  void _doFocusAnimation(GlobalKey key, Size newSize) {
+    print('_doFocusAnimation()');
+    final RenderBox objRenderBox = key.currentContext.findRenderObject();
+    final Offset objCoordinates =
+        objRenderBox.localToGlobal(Offset.zero); //目标控件的屏幕绝对坐标
+    print('_doFocusAnimation objCoordinates = $objCoordinates');
+    double left = objCoordinates.dx;
+    double top = objCoordinates.dy - widget.screenSize.height / 4;
+    double right =
+        widget.screenSize.width - objCoordinates.dx - newSize.width - 10.0;
+    double bottom =
+        widget.screenSize.height - objCoordinates.dy - newSize.height - 10.0;
+    RelativeRect newRect = new RelativeRect.fromLTRB(left, top, right, bottom);
+    print("_doFocusAnimation rect = " +
+        rect.toString() +
+        " newRect = " +
+        newRect.toString());
+    rectAnimation = new RelativeRectTween(begin: rect, end: newRect)
+        .animate(focusController);
+    focusController.forward();
+    focusController
+      ..value = 0.0
+      ..fling();
+  }
+
+  void initialFocusAnimation(Offset initOffset, Size size) {
+    print('initialFocusAnimation()');
+    rect = new RelativeRect.fromLTRB(
+      initOffset.dx,
+      initOffset.dy - widget.screenSize.height / 4,
+      widget.screenSize.width - initOffset.dx - size.width - 10.0,
+      widget.screenSize.height - initOffset.dy - size.height - 10.0,
+    );
+    print("initialFocusAnimation() rect = " + rect.toString());
+    rectAnimation =
+        new RelativeRectTween(begin: rect, end: rect.shift(Offset.zero))
+            .animate(focusController);
+    focusController.forward();
+    focusController
+      ..value = 0.0
+      ..fling();
   }
 
   // 释放对象使用的资源
   @override
   void dispose() {
+    _tabController.dispose();
+    focusController.dispose();
     super.dispose();
-    _controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-            backgroundColor: Colors.black,
-            bottom: new TabBar(
-              indicatorColor: const Color(0x00000000),
-              labelColor: Colors.green,
-              labelStyle: new TextStyle(
-                color: Colors.white,
-                fontSize: 16.0,
-                fontFamily: 'serif',
-              ),
-              unselectedLabelColor: Colors.white,
-              // 控件的选择和动画状态
-              controller: _controller,
-              // 标签栏是否可以水平滚动
-              isScrollable: true,
-              // 标签控件的列表
-              tabs: _allPages.map((_Page page) {
-                return new Tab(text: page.text, icon: new Icon(page.icon));
-              }).toList(),
-            )),
-        body: new TabBarView(
-          // 控件的选择和动画状态
-          controller: _controller,
-          // 每个标签一个控件
-          children: _allPages.map((_Page page) {
-            return new Container(
-                key: new ObjectKey(page.icon), child: page.widget);
-          }).toList(),
+      appBar: new AppBar(
+          backgroundColor: Colors.black,
+          bottom: new TabBar(
+            indicatorColor: const Color(0x00000000),
+            labelColor: Colors.green,
+            labelStyle: new TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+              fontFamily: 'serif',
+            ),
+            unselectedLabelColor: Colors.white,
+            // 控件的选择和动画状态
+            controller: _tabController,
+            // 标签栏是否可以水平滚动
+            isScrollable: true,
+            // 标签控件的列表
+            tabs: _allPages.map((_Page page) {
+              return new Tab(text: page.text, icon: new Icon(page.icon));
+            }).toList(),
+          )),
+      body: buildContent(),
+    );
+  }
+
+  Stack buildContent() {
+    var focusBox = new PositionedTransition(
+        rect: rectAnimation,
+        child: new Image.asset(
+          'images/launcher/move_focus.png',
+          fit: BoxFit.fill,
         ));
+    var content = new TabBarView(
+      // 控件的选择和动画状态
+      controller: _tabController,
+      // 每个标签一个控件
+      children: _allPages.map((_Page page) {
+        return new Container(key: new ObjectKey(page.icon), child: page.widget);
+      }).toList(),
+    );
+    return new Stack(children: <Widget>[content, focusBox]);
   }
 }
