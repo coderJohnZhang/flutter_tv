@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'dart:ui' show window;
 import 'page0.dart';
 import 'page1.dart';
@@ -22,18 +23,23 @@ class PosterDemo extends StatefulWidget {
   _PosterDemoState createState() => new _PosterDemoState();
 }
 
-class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
+class _PosterDemoState extends State<PosterDemo>
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   TabController _tabController;
   List<_Page> _allPages;
   Animation<RelativeRect> rectAnimation;
   AnimationController focusController;
   RelativeRect rect;
-  final Size screenSize = window.physicalSize / window.devicePixelRatio;
+  Size screenSize = window.physicalSize / window.devicePixelRatio;
 
   @override
-  void initState() {
-    print('initState() screenSize = $screenSize');
-    super.initState();
+  void didChangeMetrics() {
+    print('didChangeMetrics() screenSize = $screenSize');
+    screenSize = window.physicalSize / window.devicePixelRatio;
+    updateView();
+  }
+
+  void updateView() {
     _allPages = <_Page>[
       new _Page(
           icon: Icons.event,
@@ -208,6 +214,14 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
     initialFocusAnimation(initOffset, size);
   }
 
+  @override
+  void initState() {
+    print('initState() screenSize = $screenSize');
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    updateView();
+  }
+
   void handleAnimation() {
     setState(() {
       rect = rectAnimation.value;
@@ -279,6 +293,7 @@ class _PosterDemoState extends State<PosterDemo> with TickerProviderStateMixin {
   void dispose() {
     _tabController.dispose();
     focusController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
