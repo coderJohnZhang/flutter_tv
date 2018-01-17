@@ -254,9 +254,9 @@ class _PosterDemoState extends State<PosterDemo>
     print('_doFocusAnimation objCoordinates = $objCoordinates');
     double left = objCoordinates.dx;
     double top = objCoordinates.dy - screenSize.height / 4;
-    double right = screenSize.width - objCoordinates.dx - newSize.width - 10.0;
+    double right = screenSize.width - objCoordinates.dx - newSize.width - 5.0;
     double bottom =
-        screenSize.height - objCoordinates.dy - newSize.height - 10.0;
+        screenSize.height - objCoordinates.dy - newSize.height - 5.0;
     RelativeRect newRect = new RelativeRect.fromLTRB(left, top, right, bottom);
     print("_doFocusAnimation rect = " +
         rect.toString() +
@@ -275,8 +275,8 @@ class _PosterDemoState extends State<PosterDemo>
     rect = new RelativeRect.fromLTRB(
       initOffset.dx,
       initOffset.dy - screenSize.height / 4,
-      screenSize.width - initOffset.dx - size.width - 10.0,
-      screenSize.height - initOffset.dy - size.height - 10.0,
+      screenSize.width - initOffset.dx - size.width - 5.0,
+      screenSize.height - initOffset.dy - size.height - 5.0,
     );
     print("initialFocusAnimation() rect = " + rect.toString());
     rectAnimation =
