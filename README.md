@@ -8,10 +8,7 @@ A tv launcher focus animation simple build with flutter.
 
 ## Screenshot
 
-last(2018/01/01)<br><br><br>
 <img src="https://github.com/coderJohnZhang/flutter_tv/blob/master/art/demo.gif" width="600"><br><br><br>
-update(2018/01/11)<br><br><br>
-<img src="https://github.com/coderJohnZhang/flutter_tv/blob/master/art/demo1.gif" width="600"><br><br><br>
 
 ## About me
 

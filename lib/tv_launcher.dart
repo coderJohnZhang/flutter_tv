@@ -250,7 +250,7 @@ class _PosterDemoState extends State<PosterDemo>
     print('_doFocusAnimation()');
     final RenderBox objRenderBox = key.currentContext.findRenderObject();
     final Offset objCoordinates =
-        objRenderBox.localToGlobal(Offset.zero); //目标控件的屏幕绝对坐标
+        objRenderBox.localToGlobal(Offset.zero); //目标控件的绝对坐标
     print('_doFocusAnimation objCoordinates = $objCoordinates');
     double left = objCoordinates.dx;
     double top = objCoordinates.dy - screenSize.height / 4;
