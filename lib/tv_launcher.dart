@@ -19,6 +19,13 @@ class _Page {
 }
 
 class PosterDemo extends StatefulWidget {
+  const PosterDemo({
+    Key key,
+    this.screenSize,
+  })
+      : super(key: key);
+  final Size screenSize;
+
   @override
   _PosterDemoState createState() => new _PosterDemoState();
 }
@@ -30,13 +37,18 @@ class _PosterDemoState extends State<PosterDemo>
   Animation<RelativeRect> rectAnimation;
   AnimationController focusController;
   RelativeRect rect;
-  Size screenSize = window.physicalSize / window.devicePixelRatio;
+  Size screenSize;
 
   @override
   void didChangeMetrics() {
-    print('didChangeMetrics() screenSize = $screenSize');
-    screenSize = window.physicalSize / window.devicePixelRatio;
-    updateView();
+    if (screenSize == Size.zero) {
+      screenSize = window.physicalSize / window.devicePixelRatio;
+      print('didChangeMetrics() screenSize = $screenSize');
+      if (screenSize == Size.zero) {
+        screenSize = new Size(960.0, 540.0);
+      }
+      updateView();
+    }
   }
 
   void updateView() {
@@ -216,8 +228,9 @@ class _PosterDemoState extends State<PosterDemo>
 
   @override
   void initState() {
-    print('initState() screenSize = $screenSize');
     super.initState();
+    screenSize = widget.screenSize;
+    print('initState() screenSize = $screenSize');
     WidgetsBinding.instance.addObserver(this);
     updateView();
   }
