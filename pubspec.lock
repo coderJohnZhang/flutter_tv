@@ -98,7 +98,7 @@ packages:
       name: html
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.2+1"
+    version: "0.13.2+2"
   http:
     description:
       name: http
@@ -320,7 +320,7 @@ packages:
       name: watcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.7+4"
+    version: "0.9.7+6"
   web_socket_channel:
     description:
       name: web_socket_channel
