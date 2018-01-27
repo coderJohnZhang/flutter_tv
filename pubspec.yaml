@@ -1,5 +1,5 @@
 name: flutter_tv
-description: A new Flutter project.
+description: A tv app build with flutter.
 
 dependencies:
   flutter:

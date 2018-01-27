@@ -382,7 +382,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.myapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.flutter.tv.flutterTv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -404,7 +404,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.myapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tcl.flutter.tv.flutterTv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
