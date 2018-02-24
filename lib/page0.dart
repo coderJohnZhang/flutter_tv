@@ -81,6 +81,7 @@ class Page0WidgetState extends State<Page0Widget> {
                       RawKeyDownEvent rawKeyDownEvent = event;
                       RawKeyEventDataAndroid rawKeyEventDataAndroid =
                           rawKeyDownEvent.data;
+                      print("page0 ${rawKeyEventDataAndroid.keyCode}");
                       switch (rawKeyEventDataAndroid.keyCode) {
                         case KEY_LEFT:
                           if (widget.onFocusLeft != null) {

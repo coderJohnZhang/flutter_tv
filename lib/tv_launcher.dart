@@ -222,7 +222,7 @@ class _PosterDemoState extends State<PosterDemo>
     focusController.addListener(handleAnimation);
     Offset initOffset = new Offset(0.0, screenSize.height / 4);
     Size size =
-        new Size(screenSize.width / 3 - 10.0, screenSize.height * 3 / 8 - 10.0);
+    new Size(screenSize.width / 3 - 10.0, screenSize.height * 3 / 8 - 10.0);
     initialFocusAnimation(initOffset, size);
   }
 
@@ -247,7 +247,7 @@ class _PosterDemoState extends State<PosterDemo>
     }
     _tabController.animateTo(_tabController.index,
         duration: kTabScrollDuration, curve: Curves.ease);
-    print("current index = " + _tabController.index.toString());
+    print("current index = ${_tabController.index}");
   }
 
   void nextPage() {
@@ -256,14 +256,14 @@ class _PosterDemoState extends State<PosterDemo>
     }
     _tabController.animateTo(_tabController.index,
         duration: kTabScrollDuration, curve: Curves.ease);
-    print("current index = " + _tabController.index.toString());
+    print("current index = ${_tabController.index}");
   }
 
   void _doFocusAnimation(GlobalKey key, Size newSize) {
     print('_doFocusAnimation()');
     final RenderBox objRenderBox = key.currentContext.findRenderObject();
     final Offset objCoordinates =
-        objRenderBox.localToGlobal(Offset.zero); //目标控件的绝对坐标
+    objRenderBox.localToGlobal(Offset.zero); //目标控件的绝对坐标
     print('_doFocusAnimation objCoordinates = $objCoordinates');
     double left = objCoordinates.dx;
     double top = objCoordinates.dy - screenSize.height / 4;
@@ -271,10 +271,7 @@ class _PosterDemoState extends State<PosterDemo>
     double bottom =
         screenSize.height - objCoordinates.dy - newSize.height - 5.0;
     RelativeRect newRect = new RelativeRect.fromLTRB(left, top, right, bottom);
-    print("_doFocusAnimation rect = " +
-        rect.toString() +
-        " newRect = " +
-        newRect.toString());
+    print("_doFocusAnimation rect = $rect newRect = $newRect");
     rectAnimation = new RelativeRectTween(begin: rect, end: newRect)
         .animate(focusController);
     focusController.forward();
@@ -291,7 +288,7 @@ class _PosterDemoState extends State<PosterDemo>
       screenSize.width - initOffset.dx - size.width - 5.0,
       screenSize.height - initOffset.dy - size.height - 5.0,
     );
-    print("initialFocusAnimation() rect = " + rect.toString());
+    print("initialFocusAnimation() rect = $rect");
     rectAnimation =
         new RelativeRectTween(begin: rect, end: rect.shift(Offset.zero))
             .animate(focusController);
