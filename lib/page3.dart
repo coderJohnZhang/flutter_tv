@@ -13,8 +13,7 @@ class Page3Widget extends StatefulWidget {
     this.onFocusUp,
     this.onFocusDown,
     this.screenSize,
-  })
-      : super(key: key);
+  }) : super(key: key);
   final OnFocusChangeCallback<GlobalKey, Size> onFocusLeft;
   final OnFocusChangeCallback<GlobalKey, Size> onFocusRight;
   final OnFocusChangeCallback<GlobalKey, Size> onFocusUp;
@@ -110,198 +109,198 @@ class Page3WidgetState extends State<Page3Widget> {
                           widget.screenSize.height * 3 / 4 - 10.0)))),
           new Expanded(
               child: new Column(children: [
-            new Expanded(
-                child: new RawKeyboardListener(
-                    key: globalKey1,
-                    focusNode: focusNode1,
-                    onKey: (RawKeyEvent event) {
-                      if (event is RawKeyDownEvent &&
-                          event.data is RawKeyEventDataAndroid) {
-                        RawKeyDownEvent rawKeyDownEvent = event;
-                        RawKeyEventDataAndroid rawKeyEventDataAndroid =
-                            rawKeyDownEvent.data;
-                        switch (rawKeyEventDataAndroid.keyCode) {
-                          case KEY_LEFT:
-                            FocusScope.of(context).requestFocus(focusNode0);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 4 - 10.0);
-                            if (widget.onFocusLeft != null) {
-                              widget.onFocusLeft(globalKey0, size);
+                new Expanded(
+                    child: new RawKeyboardListener(
+                        key: globalKey1,
+                        focusNode: focusNode1,
+                        onKey: (RawKeyEvent event) {
+                          if (event is RawKeyDownEvent &&
+                              event.data is RawKeyEventDataAndroid) {
+                            RawKeyDownEvent rawKeyDownEvent = event;
+                            RawKeyEventDataAndroid rawKeyEventDataAndroid =
+                                rawKeyDownEvent.data;
+                            switch (rawKeyEventDataAndroid.keyCode) {
+                              case KEY_LEFT:
+                                FocusScope.of(context).requestFocus(focusNode0);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 4 - 10.0);
+                                if (widget.onFocusLeft != null) {
+                                  widget.onFocusLeft(globalKey0, size);
+                                }
+                                break;
+                              case KEY_RIGHT:
+                                FocusScope.of(context).requestFocus(focusNode3);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 8 - 10.0);
+                                if (widget.onFocusRight != null) {
+                                  widget.onFocusRight(globalKey3, size);
+                                }
+                                break;
+                              case KEY_DOWN:
+                                FocusScope.of(context).requestFocus(focusNode2);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 8 - 10.0);
+                                if (widget.onFocusDown != null) {
+                                  widget.onFocusDown(globalKey2, size);
+                                }
+                                break;
+                              case KEY_UP:
+                                break;
+                              default:
+                                break;
                             }
-                            break;
-                          case KEY_RIGHT:
-                            FocusScope.of(context).requestFocus(focusNode3);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 8 - 10.0);
-                            if (widget.onFocusRight != null) {
-                              widget.onFocusRight(globalKey3, size);
+                          }
+                        },
+                        child: buildPost(
+                            kPosters[1],
+                            new Size(widget.screenSize.width / 3 - 10.0,
+                                widget.screenSize.height * 3 / 8 - 10.0)))),
+                new Expanded(
+                    child: new RawKeyboardListener(
+                        key: globalKey2,
+                        focusNode: focusNode2,
+                        onKey: (RawKeyEvent event) {
+                          if (event is RawKeyDownEvent &&
+                              event.data is RawKeyEventDataAndroid) {
+                            RawKeyDownEvent rawKeyDownEvent = event;
+                            RawKeyEventDataAndroid rawKeyEventDataAndroid =
+                                rawKeyDownEvent.data;
+                            switch (rawKeyEventDataAndroid.keyCode) {
+                              case KEY_LEFT:
+                                FocusScope.of(context).requestFocus(focusNode0);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 4 - 10.0);
+                                if (widget.onFocusLeft != null) {
+                                  widget.onFocusLeft(globalKey0, size);
+                                }
+                                break;
+                              case KEY_RIGHT:
+                                FocusScope.of(context).requestFocus(focusNode4);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 8 - 10.0);
+                                if (widget.onFocusRight != null) {
+                                  widget.onFocusRight(globalKey4, size);
+                                }
+                                break;
+                              case KEY_DOWN:
+                                break;
+                              case KEY_UP:
+                                FocusScope.of(context).requestFocus(focusNode1);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 8 - 10.0);
+                                if (widget.onFocusUp != null) {
+                                  widget.onFocusUp(globalKey1, size);
+                                }
+                                break;
+                              default:
+                                break;
                             }
-                            break;
-                          case KEY_DOWN:
-                            FocusScope.of(context).requestFocus(focusNode2);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 8 - 10.0);
-                            if (widget.onFocusDown != null) {
-                              widget.onFocusDown(globalKey2, size);
-                            }
-                            break;
-                          case KEY_UP:
-                            break;
-                          default:
-                            break;
-                        }
-                      }
-                    },
-                    child: buildPost(
-                        kPosters[1],
-                        new Size(widget.screenSize.width / 3 - 10.0,
-                            widget.screenSize.height * 3 / 8 - 10.0)))),
-            new Expanded(
-                child: new RawKeyboardListener(
-                    key: globalKey2,
-                    focusNode: focusNode2,
-                    onKey: (RawKeyEvent event) {
-                      if (event is RawKeyDownEvent &&
-                          event.data is RawKeyEventDataAndroid) {
-                        RawKeyDownEvent rawKeyDownEvent = event;
-                        RawKeyEventDataAndroid rawKeyEventDataAndroid =
-                            rawKeyDownEvent.data;
-                        switch (rawKeyEventDataAndroid.keyCode) {
-                          case KEY_LEFT:
-                            FocusScope.of(context).requestFocus(focusNode0);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 4 - 10.0);
-                            if (widget.onFocusLeft != null) {
-                              widget.onFocusLeft(globalKey0, size);
-                            }
-                            break;
-                          case KEY_RIGHT:
-                            FocusScope.of(context).requestFocus(focusNode4);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 8 - 10.0);
-                            if (widget.onFocusRight != null) {
-                              widget.onFocusRight(globalKey4, size);
-                            }
-                            break;
-                          case KEY_DOWN:
-                            break;
-                          case KEY_UP:
-                            FocusScope.of(context).requestFocus(focusNode1);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 8 - 10.0);
-                            if (widget.onFocusUp != null) {
-                              widget.onFocusUp(globalKey1, size);
-                            }
-                            break;
-                          default:
-                            break;
-                        }
-                      }
-                    },
-                    child: buildPost(
-                        kPosters[2],
-                        new Size(widget.screenSize.width / 3 - 10.0,
-                            widget.screenSize.height * 3 / 8 - 10.0))))
-          ])),
+                          }
+                        },
+                        child: buildPost(
+                            kPosters[2],
+                            new Size(widget.screenSize.width / 3 - 10.0,
+                                widget.screenSize.height * 3 / 8 - 10.0))))
+              ])),
           new Expanded(
               child: new Column(children: [
-            new Expanded(
-                child: new RawKeyboardListener(
-                    key: globalKey3,
-                    focusNode: focusNode3,
-                    onKey: (RawKeyEvent event) {
-                      if (event is RawKeyDownEvent &&
-                          event.data is RawKeyEventDataAndroid) {
-                        RawKeyDownEvent rawKeyDownEvent = event;
-                        RawKeyEventDataAndroid rawKeyEventDataAndroid =
-                            rawKeyDownEvent.data;
-                        switch (rawKeyEventDataAndroid.keyCode) {
-                          case KEY_LEFT:
-                            FocusScope.of(context).requestFocus(focusNode1);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 8 - 10.0);
-                            if (widget.onFocusLeft != null) {
-                              widget.onFocusLeft(globalKey1, size);
+                new Expanded(
+                    child: new RawKeyboardListener(
+                        key: globalKey3,
+                        focusNode: focusNode3,
+                        onKey: (RawKeyEvent event) {
+                          if (event is RawKeyDownEvent &&
+                              event.data is RawKeyEventDataAndroid) {
+                            RawKeyDownEvent rawKeyDownEvent = event;
+                            RawKeyEventDataAndroid rawKeyEventDataAndroid =
+                                rawKeyDownEvent.data;
+                            switch (rawKeyEventDataAndroid.keyCode) {
+                              case KEY_LEFT:
+                                FocusScope.of(context).requestFocus(focusNode1);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 8 - 10.0);
+                                if (widget.onFocusLeft != null) {
+                                  widget.onFocusLeft(globalKey1, size);
+                                }
+                                break;
+                              case KEY_RIGHT:
+                                if (widget.onFocusRight != null) {
+                                  widget.onFocusRight(null, null);
+                                }
+                                break;
+                              case KEY_DOWN:
+                                FocusScope.of(context).requestFocus(focusNode4);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 8 - 10.0);
+                                if (widget.onFocusDown != null) {
+                                  widget.onFocusDown(globalKey4, size);
+                                }
+                                break;
+                              case KEY_UP:
+                                break;
+                              default:
+                                break;
                             }
-                            break;
-                          case KEY_RIGHT:
-                            if (widget.onFocusRight != null) {
-                              widget.onFocusRight(null, null);
+                          }
+                        },
+                        child: buildPost(
+                            kPosters[3],
+                            new Size(widget.screenSize.width / 3 - 10.0,
+                                widget.screenSize.height * 3 / 8 - 10.0)))),
+                new Expanded(
+                    child: new RawKeyboardListener(
+                        key: globalKey4,
+                        focusNode: focusNode4,
+                        onKey: (RawKeyEvent event) {
+                          if (event is RawKeyDownEvent &&
+                              event.data is RawKeyEventDataAndroid) {
+                            RawKeyDownEvent rawKeyDownEvent = event;
+                            RawKeyEventDataAndroid rawKeyEventDataAndroid =
+                                rawKeyDownEvent.data;
+                            switch (rawKeyEventDataAndroid.keyCode) {
+                              case KEY_LEFT:
+                                FocusScope.of(context).requestFocus(focusNode2);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 8 - 10.0);
+                                if (widget.onFocusLeft != null) {
+                                  widget.onFocusLeft(globalKey2, size);
+                                }
+                                break;
+                              case KEY_RIGHT:
+                                if (widget.onFocusRight != null) {
+                                  widget.onFocusRight(null, null);
+                                }
+                                break;
+                              case KEY_DOWN:
+                                break;
+                              case KEY_UP:
+                                FocusScope.of(context).requestFocus(focusNode3);
+                                Size size = new Size(
+                                    widget.screenSize.width / 3 - 10.0,
+                                    widget.screenSize.height * 3 / 8 - 10.0);
+                                if (widget.onFocusUp != null) {
+                                  widget.onFocusUp(globalKey3, size);
+                                }
+                                break;
+                              default:
+                                break;
                             }
-                            break;
-                          case KEY_DOWN:
-                            FocusScope.of(context).requestFocus(focusNode4);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 8 - 10.0);
-                            if (widget.onFocusDown != null) {
-                              widget.onFocusDown(globalKey4, size);
-                            }
-                            break;
-                          case KEY_UP:
-                            break;
-                          default:
-                            break;
-                        }
-                      }
-                    },
-                    child: buildPost(
-                        kPosters[3],
-                        new Size(widget.screenSize.width / 3 - 10.0,
-                            widget.screenSize.height * 3 / 8 - 10.0)))),
-            new Expanded(
-                child: new RawKeyboardListener(
-                    key: globalKey4,
-                    focusNode: focusNode4,
-                    onKey: (RawKeyEvent event) {
-                      if (event is RawKeyDownEvent &&
-                          event.data is RawKeyEventDataAndroid) {
-                        RawKeyDownEvent rawKeyDownEvent = event;
-                        RawKeyEventDataAndroid rawKeyEventDataAndroid =
-                            rawKeyDownEvent.data;
-                        switch (rawKeyEventDataAndroid.keyCode) {
-                          case KEY_LEFT:
-                            FocusScope.of(context).requestFocus(focusNode2);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 8 - 10.0);
-                            if (widget.onFocusLeft != null) {
-                              widget.onFocusLeft(globalKey2, size);
-                            }
-                            break;
-                          case KEY_RIGHT:
-                            if (widget.onFocusRight != null) {
-                              widget.onFocusRight(null, null);
-                            }
-                            break;
-                          case KEY_DOWN:
-                            break;
-                          case KEY_UP:
-                            FocusScope.of(context).requestFocus(focusNode3);
-                            Size size = new Size(
-                                widget.screenSize.width / 3 - 10.0,
-                                widget.screenSize.height * 3 / 8 - 10.0);
-                            if (widget.onFocusUp != null) {
-                              widget.onFocusUp(globalKey3, size);
-                            }
-                            break;
-                          default:
-                            break;
-                        }
-                      }
-                    },
-                    child: buildPost(
-                        kPosters[4],
-                        new Size(widget.screenSize.width / 3 - 10.0,
-                            widget.screenSize.height * 3 / 8 - 10.0))))
-          ]))
+                          }
+                        },
+                        child: buildPost(
+                            kPosters[4],
+                            new Size(widget.screenSize.width / 3 - 10.0,
+                                widget.screenSize.height * 3 / 8 - 10.0))))
+              ]))
         ]));
   }
 }

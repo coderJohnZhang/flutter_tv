@@ -40,6 +40,7 @@ flutter:
   - images/launcher/ic_post_7.jpg
   - images/launcher/main_bg.jpg
   - images/launcher/move_focus.png
+  - images/lake.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

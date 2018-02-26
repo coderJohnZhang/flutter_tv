@@ -186,8 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
               new Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.all(5.0),
-                child:
-                new RawKeyboardListener(
+                child: new RawKeyboardListener(
                   focusNode: focusNode2,
                   onKey: (RawKeyEvent event) {
                     if (event is RawKeyDownEvent &&

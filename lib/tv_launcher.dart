@@ -22,8 +22,7 @@ class PosterDemo extends StatefulWidget {
   const PosterDemo({
     Key key,
     this.screenSize,
-  })
-      : super(key: key);
+  }) : super(key: key);
   final Size screenSize;
 
   @override
@@ -221,8 +220,8 @@ class _PosterDemoState extends State<PosterDemo>
         duration: const Duration(milliseconds: 300), vsync: this);
     focusController.addListener(handleAnimation);
     Offset initOffset = new Offset(0.0, screenSize.height / 4);
-    Size size =
-    new Size(screenSize.width / 3 - 10.0, screenSize.height * 3 / 8 - 10.0);
+    Size size = new Size(
+        screenSize.width / 3 - 10.0, screenSize.height * 3 / 8 - 10.0);
     initialFocusAnimation(initOffset, size);
   }
 
