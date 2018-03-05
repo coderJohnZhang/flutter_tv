@@ -310,6 +310,7 @@ class _PosterDemoState extends State<PosterDemo>
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+          title: new Text('Launcher Demo'),
           backgroundColor: Colors.black,
           bottom: new TabBar(
             indicatorColor: const Color(0x00000000),
