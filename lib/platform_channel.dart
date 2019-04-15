@@ -1,7 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'key_code.dart';
 
 class PlatformChannel extends StatefulWidget {
@@ -10,17 +9,17 @@ class PlatformChannel extends StatefulWidget {
 }
 
 class _PlatformChannelState extends State<PlatformChannel> {
-  static const MethodChannel methodChannel = const MethodChannel(
-      'samples.flutter.io/battery');
-  static const EventChannel eventChannel = const EventChannel(
-      'samples.flutter.io/charging');
+  static const MethodChannel methodChannel =
+      const MethodChannel('samples.flutter.io/battery');
+  static const EventChannel eventChannel =
+      const EventChannel('samples.flutter.io/charging');
 
   String _batteryLevel = 'Battery level: unknown.';
   String _chargingStatus = 'Battery status: unknown.';
   FocusNode focusNode;
   bool _active = false;
 
-  Future<Null> _getBatteryLevel() async {
+  _getBatteryLevel() async {
     String batteryLevel;
     try {
       final int result = await methodChannel.invokeMethod('getBatteryLevel');
@@ -50,11 +49,11 @@ class _PlatformChannelState extends State<PlatformChannel> {
   void _onEvent(Object event) {
     setState(() {
       _chargingStatus =
-      "Battery status: ${event == 'charging' ? '' : 'dis'}charging.";
+          "Battery status: ${event == 'charging' ? '' : 'dis'}charging.";
     });
   }
 
-  void _onError(PlatformException error) {
+  void _onError(Object error) {
     setState(() {
       _chargingStatus = 'Battery status: unknown.';
     });
@@ -72,8 +71,8 @@ class _PlatformChannelState extends State<PlatformChannel> {
               new Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Text(
-                      _batteryLevel, key: const Key('Battery level label')),
+                  new Text(_batteryLevel,
+                      key: const Key('Battery level label')),
                   new Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: new RawKeyboardListener(
@@ -96,7 +95,8 @@ class _PlatformChannelState extends State<PlatformChannel> {
                       },
                       child: new RaisedButton(
                         child: const Text('Refresh'),
-                        color: _active ? Colors.lightGreen[700] : Colors.grey[600],
+                        color:
+                            _active ? Colors.lightGreen[700] : Colors.grey[600],
                         onPressed: _getBatteryLevel,
                       ),
                     ),

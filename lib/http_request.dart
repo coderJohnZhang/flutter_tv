@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'key_code.dart';
 
 class HttpDemo extends StatefulWidget {
@@ -26,13 +27,13 @@ class _HttpDemoState extends State<HttpDemo> {
     try {
       var request = await httpClient.getUrl(Uri.parse(url));
       var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
-        var data = JSON.decode(json);
+      if (response.statusCode == HttpStatus.ok) {
+        var jsonStr = await response.transform(utf8.decoder).join();
+        var data = json.decode(jsonStr);
         result = data['origin'];
       } else {
         result =
-        'Error getting IP address:\nHttp status ${response.statusCode}';
+            'Error getting IP address:\nHttp status ${response.statusCode}';
       }
     } catch (exception) {
       result = 'Failed getting IP address';
