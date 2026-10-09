@@ -1,0 +1,133 @@
+{
+  "tileWidth": 237,
+  "tileHeight": 332,
+  "rows": [
+    {
+      "title": "Recently added",
+      "items": [
+        {
+          "id": 0,
+          "title": "Feature 01",
+          "image": "images/posters/poster_01.webp"
+        },
+        {
+          "id": 1,
+          "title": "Feature 02",
+          "image": "images/posters/poster_02.webp"
+        },
+        {
+          "id": 2,
+          "title": "Feature 03",
+          "image": "images/posters/poster_03.webp"
+        },
+        {
+          "id": 3,
+          "title": "Feature 04",
+          "image": "images/posters/poster_04.webp"
+        },
+        {
+          "id": 4,
+          "title": "Feature 05",
+          "image": "images/posters/poster_05.webp"
+        },
+        {
+          "id": 5,
+          "title": "Feature 06",
+          "image": "images/posters/poster_06.webp"
+        },
+        {
+          "id": 6,
+          "title": "Feature 07",
+          "image": "images/posters/poster_07.webp"
+        }
+      ]
+    },
+    {
+      "title": "Because you watched Feature 03",
+      "items": [
+        {
+          "id": 100,
+          "title": "Feature 08",
+          "image": "images/posters/poster_08.webp"
+        },
+        {
+          "id": 101,
+          "title": "Feature 09",
+          "image": "images/posters/poster_09.webp"
+        },
+        {
+          "id": 102,
+          "title": "Feature 10",
+          "image": "images/posters/poster_10.webp"
+        },
+        {
+          "id": 103,
+          "title": "Feature 11",
+          "image": "images/posters/poster_11.webp"
+        },
+        {
+          "id": 104,
+          "title": "Feature 12",
+          "image": "images/posters/poster_12.webp"
+        },
+        {
+          "id": 105,
+          "title": "Feature 13",
+          "image": "images/posters/poster_13.webp"
+        },
+        {
+          "id": 106,
+          "title": "Feature 14",
+          "image": "images/posters/poster_14.webp"
+        }
+      ]
+    },
+    {
+      "title": "Continue watching",
+      "items": [
+        {
+          "id": 200,
+          "title": "Feature 15",
+          "image": "images/posters/poster_15.webp",
+          "progress": 0.75
+        },
+        {
+          "id": 201,
+          "title": "Feature 16",
+          "image": "images/posters/poster_16.webp",
+          "progress": 0.65
+        },
+        {
+          "id": 202,
+          "title": "Feature 17",
+          "image": "images/posters/poster_17.webp",
+          "progress": 0.55
+        },
+        {
+          "id": 203,
+          "title": "Feature 18",
+          "image": "images/posters/poster_18.webp",
+          "progress": 0.45
+        },
+        {
+          "id": 204,
+          "title": "Feature 19",
+          "image": "images/posters/poster_19.webp",
+          "progress": 0.35
+        },
+        {
+          "id": 205,
+          "title": "Feature 20",
+          "image": "images/posters/poster_20.webp",
+          "progress": 0.25
+        },
+        {
+          "id": 206,
+          "title": "Feature 21",
+          "image": "images/posters/poster_21.webp",
+          "progress": 0.15
+        }
+      ]
+    }
+  ]
+}

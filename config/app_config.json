@@ -1,0 +1,44 @@
+{
+  "apps": [
+    {
+      "id": 0,
+      "title": "App Store",
+      "image": "images/apps/app_appstore.webp",
+      "action": {
+        "action": "open_store"
+      }
+    },
+    {
+      "id": 1,
+      "title": "T-Browser",
+      "image": "images/apps/app_tbrowser.webp",
+      "action": {
+        "action": "open_browser"
+      }
+    },
+    {
+      "id": 2,
+      "title": "T-Cast",
+      "image": "images/apps/app_tcast.webp",
+      "action": {
+        "action": "open_cast"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Filmbox Live",
+      "image": "images/apps/app_filmbox_live.webp",
+      "action": {
+        "action": "open_filmbox"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Chili",
+      "image": "images/apps/app_chili_light.webp",
+      "action": {
+        "action": "open_chili"
+      }
+    }
+  ]
+}

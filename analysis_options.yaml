@@ -1,0 +1,11 @@
+analyzer:
+  exclude:
+    - build/**
+
+    # Platform runners are native code with a Dart entry point at most. The
+    # analyzer has nothing to say about them, and the plugin registrants the
+    # tool writes into them are generated.
+    - android/**
+    - linux/**
+
+include: package:flutter_lints/flutter.yaml

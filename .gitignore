@@ -1,10 +1,34 @@
+# Machine and editor files.
 .DS_Store
 .atom/
 .idea
+.vscode/
+
+# IDE module files. The Flutter tool generates one per platform.
+*.iml
+
+# Pub and analyzer output.
 .packages
 .pub/
+.dart_tool/
+
+# Build output, at any depth.
 build/
-ios/.generated/
-packages
-pubspec.lock
+
+# Release artefacts that are handed out rather than committed.
+dist/
+
+# Generated plugin registrants.
 .flutter-plugins
+.flutter-plugins-dependencies
+
+# Android build output, and the machine-specific SDK path.
+android/.gradle/
+android/local.properties
+
+# This file lists generated output only. Directories that hold source are
+# deliberately absent, so a new one is tracked from its first commit.
+
+# The raw screen recording. The published animation is `art/demo.gif`; the
+# capture it was cut from is a local working file.
+*.mp4

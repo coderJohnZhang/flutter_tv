@@ -1,0 +1,16 @@
+{
+  "tv_no_signal": "无信号",
+  "source": "信号源",
+  "wifi": "无线网络",
+  "recent": "最近",
+  "recent_today": "今天",
+  "recent_earlier": "更早",
+  "recent_empty": "暂无记录",
+  "recent_clear": "全部清除",
+  "video_empty": "暂无内容",
+  "recent_back": "返回",
+  "recent_view_all": "查看全部",
+  "recent_delete": "删除",
+  "recent_delete_cancel": "取消",
+  "recent_delete_confirm": "删除所选"
+}

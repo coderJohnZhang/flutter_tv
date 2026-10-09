@@ -1,0 +1,16 @@
+{
+  "tv_no_signal": "No signal",
+  "source": "Source",
+  "wifi": "WiFi",
+  "recent": "Recent",
+  "recent_today": "Today",
+  "recent_earlier": "Earlier",
+  "recent_empty": "Nothing opened yet",
+  "recent_clear": "Clear all",
+  "video_empty": "Nothing here yet",
+  "recent_back": "Back",
+  "recent_view_all": "View all",
+  "recent_delete": "Delete",
+  "recent_delete_cancel": "Cancel",
+  "recent_delete_confirm": "Delete selected"
+}

@@ -1,0 +1,52 @@
+{
+  "input": "DTV",
+  "heading": "Channels",
+  "heroImage": "",
+  "channels": [
+    {
+      "id": 1,
+      "title": "BBC News",
+      "subtitle": "01",
+      "image": "images/channels/channel_bbc_news.webp",
+      "action": {
+        "action": "tune_channel"
+      }
+    },
+    {
+      "id": 2,
+      "title": "ITV",
+      "subtitle": "02",
+      "image": "images/channels/channel_itv.webp",
+      "action": {
+        "action": "tune_channel"
+      }
+    },
+    {
+      "id": 3,
+      "title": "UK TV",
+      "subtitle": "03",
+      "image": "images/channels/channel_uk_tv.webp",
+      "action": {
+        "action": "tune_channel"
+      }
+    },
+    {
+      "id": 4,
+      "title": "STV",
+      "subtitle": "04",
+      "image": "images/channels/channel_stv.webp",
+      "action": {
+        "action": "tune_channel"
+      }
+    },
+    {
+      "id": 5,
+      "title": "All 4",
+      "subtitle": "05",
+      "image": "images/channels/channel_all4.webp",
+      "action": {
+        "action": "tune_channel"
+      }
+    }
+  ]
+}
